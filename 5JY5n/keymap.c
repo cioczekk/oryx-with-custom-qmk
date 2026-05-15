@@ -11,7 +11,6 @@ enum custom_keycodes {
 
 
 
-#define DUAL_FUNC_0 LT(3, KC_P)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_moonlander(
@@ -24,10 +23,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [1] = LAYOUT_moonlander(
     KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,                                          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          
-    KC_TRANSPARENT, DUAL_FUNC_0,    KC_EXLM,        KC_UP,          KC_AT,          KC_HASH,        KC_NO,                                          KC_NO,          KC_MINUS,       KC_LPRN,        KC_LCBR,        KC_LBRC,        KC_PIPE,        KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_GRAVE,       KC_EXLM,        KC_UP,          KC_AT,          KC_HASH,        KC_NO,                                          KC_NO,          KC_MINUS,       KC_LPRN,        KC_LCBR,        KC_LBRC,        KC_PIPE,        KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_DLR,         KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_PERC,        KC_NO,                                                                          KC_NO,          KC_EQUAL,       KC_RIGHT_GUI,   KC_RIGHT_ALT,   KC_RIGHT_CTRL,  KC_RIGHT_SHIFT, KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_CIRC,        KC_AMPR,        KC_ASTR,        KC_QUOTE,       KC_DQUO,                                        KC_UNDS,        KC_RPRN,        KC_RCBR,        KC_RBRC,        KC_BSLS,        KC_NO,          
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
+    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TILD,        KC_TRANSPARENT,                                                                                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
     KC_TRANSPARENT, MO(3),          KC_TRANSPARENT,                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT
   ),
   [2] = LAYOUT_moonlander(
@@ -193,25 +192,9 @@ bool rgb_matrix_indicators_user(void) {
 
 
 
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
 
-    case DUAL_FUNC_0:
-      if (record->tap.count > 0) {
-        if (record->event.pressed) {
-          register_code16(KC_GRAVE);
-        } else {
-          unregister_code16(KC_GRAVE);
-        }
-      } else {
-        if (record->event.pressed) {
-          register_code16(KC_TILD);
-        } else {
-          unregister_code16(KC_TILD);
-        }  
-      }  
-      return false;
     case RGB_SLD:
         if (rawhid_state.rgb_control) {
             return false;
